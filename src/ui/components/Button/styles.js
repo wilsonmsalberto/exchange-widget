@@ -6,11 +6,11 @@ export const StyledButton = styled.button`
   text-align: center;
   text-decoration: none;
   font-size: 1.6rem;
-  border-radius: 5px;
+  border-radius: 2.5rem;
   padding: 1rem;
   margin: 0;
-  color: #000;
-  border: 2px solid #000;
+  color: #fff;
+  border: 0;
   cursor: pointer;
 
   ${(props) => {

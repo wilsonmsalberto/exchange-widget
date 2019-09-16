@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import {
   Input,
   Select,
   Wrapper,
 } from './styles';
 
-const ExchangeForm = ({ className }) => (
+const ExchangeForm = ({
+  children,
+  className,
+}) => (
   <Wrapper className={ className }>
     <Select
       options={ [
@@ -16,14 +20,17 @@ const ExchangeForm = ({ className }) => (
       ] }
     />
     <Input placeholder="0" />
+    {children}
   </Wrapper>
 );
 
 ExchangeForm.propTypes = {
+  children: PropTypes.node,
   className: PropTypes.string,
 };
 
 ExchangeForm.defaultProps = {
+  children: null,
   className: undefined,
 };
 

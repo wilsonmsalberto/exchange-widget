@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:react/recommended",
-  ],
+  "extends": "airbnb",
   "rules": {
     "array-bracket-spacing": [2, "never"],
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
