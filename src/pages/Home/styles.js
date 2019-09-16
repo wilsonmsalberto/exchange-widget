@@ -1,10 +1,17 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.div`
-  width: 100%;
-  padding: 0 2rem;
+import ExchangeForm from './ExchangeForm';
+
+const InputExchangeForm = styled(ExchangeForm)`
+  height: 20vh;
 `;
 
-export default {
-  Wrapper,
+const OutputExchangeForm = styled(ExchangeForm)`
+  height: 80vh;
+  background-color: #f3f9ff;
+`;
+
+export {
+  InputExchangeForm,
+  OutputExchangeForm,
 };

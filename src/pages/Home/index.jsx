@@ -1,11 +1,14 @@
 import React from 'react';
-
-import { Wrapper } from './styles';
+import {
+  InputExchangeForm,
+  OutputExchangeForm,
+} from './styles';
 
 const Home = () => (
-  <Wrapper>
-    Home
-  </Wrapper>
+  <>
+    <InputExchangeForm />
+    <OutputExchangeForm />
+  </>
 );
 
 export default Home;
