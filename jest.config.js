@@ -14,6 +14,7 @@ module.exports = {
   moduleNameMapper: {
     '^context(.*)$': '<rootDir>/src/context/$1',
     '^pages(.*)$': '<rootDir>/src/pages/$1',
+    '^state(.*)$': '<rootDir>/src/state/$1',
     '^ui(.*)$': '<rootDir>/src/ui/$1',
     '^views(.*)$': '<rootDir>/src/views/$1',
   },
