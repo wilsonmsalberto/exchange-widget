@@ -1,8 +1,7 @@
 import urlJoin from 'url-join';
 
-const apiKey = `?app_id=${process.env.API_KEY}`;
-const apiUrl = 'https://openexchangerates.org/api/latest.json';
+const apiUrl = 'https://api.exchangeratesapi.io/latest';
 
-export const getApiUrl = (endpoint) => urlJoin(apiUrl, apiKey, endpoint);
+export const getApiUrl = (endpoint) => urlJoin(apiUrl, endpoint);
 
 export default getApiUrl;

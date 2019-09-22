@@ -14,25 +14,48 @@ import {
   Wrapper,
 } from './styles';
 
-const Home = ({ fetchRates }) => {
-  const [selectedOrigin, setSelectedOrigin] = useState('');
-  const [selectedTarget, setSelectedTarget] = useState('');
+const Home = ({
+  fetchRates,
+  rates,
+}) => {
+  const [activeRate, setActiveRate] = useState();
+  const [rateInput, setRateInput] = useState('EUR');
+  const [rateOutput, setRateOutput] = useState('GBP');
+  const [inputAmount, setInputAmount] = useState(0);
+  const [outputAmount, setOutputAmount] = useState(0);
+
+  useEffect(() => { fetchRates(); }, [fetchRates]);
 
   useEffect(() => {
-    fetchRates();
-  }, [fetchRates]);
+    if (!rates[rateInput]) return;
+
+    const rate = rates[rateInput].rates[rateOutput];
+    const output = rate * inputAmount;
+
+    setActiveRate(rate);
+    setOutputAmount(output);
+  }, [inputAmount, rateInput, rateOutput, rates]);
 
   return (
     <>
       <InputExchangeForm
-        selected={ selectedTarget }
-        setSelected={ setSelectedOrigin }
+        rateOutput={ rateOutput }
+        setInputAmount={ setInputAmount }
+        setRateInput={ setRateInput }
       >
-        <PairSwitcher />
+        <PairSwitcher
+          activeRate={ activeRate }
+          rateInput={ rateInput }
+          rateOutput={ rateOutput }
+          setRateInput={ setRateInput }
+          setRateOutput={ setRateOutput }
+        />
       </InputExchangeForm>
       <OutputExchangeForm
-        selected={ selectedOrigin }
-        setSelected={ setSelectedTarget }
+        inputAmount={ inputAmount }
+        outputAmount={ outputAmount }
+        rateInput={ rateInput }
+        setRateOutput={ setRateOutput }
       />
       <Wrapper>
         <ExchangeButton type="submit">
@@ -45,6 +68,15 @@ const Home = ({ fetchRates }) => {
 
 Home.propTypes = {
   fetchRates: PropTypes.func.isRequired,
+  rates: PropTypes.shape({
+    base: PropTypes.string,
+    rates: PropTypes.string,
+    date: PropTypes.string,
+  }),
+};
+
+Home.defaultProps = {
+  rates: {},
 };
 
 const mapStateToProps = (state) => ({

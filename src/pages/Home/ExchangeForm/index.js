@@ -1,6 +1,10 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
   Input,
@@ -11,33 +15,60 @@ import {
 const ExchangeForm = ({
   children,
   className,
+  outputAmount,
+  rateInput,
+  rateOutput,
   rates,
-  selected,
-  setSelected,
+  setInputAmount,
+  setRateInput,
+  setRateOutput,
 }) => {
-  const [activeRate, setActiveRate] = useState('');
-  const options = Object.keys(rates).filter((rate) => rate !== selected);
+  const [selectValue, setSelectValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState([]);
 
-  useLayoutEffect(() => {
-    if (!activeRate) {
-      setActiveRate(options[0]);
-      setSelected(options[0]);
-    }
-  }, [activeRate, options, setSelected]);
+  const onSelectChange = useCallback((value) => {
+    setSelectValue(value);
+    if (setRateInput) setRateInput(value);
+    if (setRateOutput) setRateOutput(value);
+  }, [setRateInput, setRateOutput]);
 
-  const handleOnChange = (e) => {
-    setActiveRate(e.target.value);
-    setSelected(e.target.value);
+  useEffect(() => {
+    if (!selectValue) setSelectValue(options[0]);
+    if (outputAmount) setInputValue(outputAmount.toFixed(2));
+  }, [options, outputAmount, selectValue]);
+
+  useEffect(() => {
+    let filterBy = '';
+
+    if (rateInput) filterBy = rateInput;
+    if (rateOutput) filterBy = rateOutput;
+
+    const filteredOptions = Object.keys(rates).filter((rate) => rate !== filterBy);
+
+    setOptions(filteredOptions);
+  }, [rateInput, rateOutput, rates]);
+
+  const handleOnInputChange = (e) => {
+    setInputValue(e.target.value);
+    if (setInputAmount) setInputAmount(e.target.value);
   };
+
+  const handleOnSelectChange = (e) => onSelectChange(e.target.value);
 
   return (
     <Wrapper className={ className }>
       <Select
-        onChange={ handleOnChange }
+        onChange={ handleOnSelectChange }
         options={ options }
-        value={ activeRate }
+        value={ selectValue }
       />
-      <Input placeholder="0" />
+      <Input
+        disabled={ !!rateInput }
+        onChange={ handleOnInputChange }
+        placeholder="0"
+        value={ inputValue }
+      />
       {children}
     </Wrapper>
   );
@@ -46,16 +77,32 @@ const ExchangeForm = ({
 ExchangeForm.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  rates: PropTypes.objectOf(PropTypes.number),
-  selected: PropTypes.string,
-  setSelected: PropTypes.func.isRequired,
+  outputAmount: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+  rateInput: PropTypes.string,
+  rateOutput: PropTypes.string,
+  rates: PropTypes.shape({
+    base: PropTypes.string,
+    rates: PropTypes.string,
+    date: PropTypes.string,
+  }),
+  setInputAmount: PropTypes.func,
+  setRateInput: PropTypes.func,
+  setRateOutput: PropTypes.func,
 };
 
 ExchangeForm.defaultProps = {
   children: null,
   className: undefined,
+  outputAmount: '',
+  rateInput: '',
+  rateOutput: '',
   rates: {},
-  selected: undefined,
+  setInputAmount: null,
+  setRateInput: null,
+  setRateOutput: null,
 };
 
 const mapStateToProps = (state) => ({

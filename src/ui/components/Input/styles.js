@@ -1,6 +1,16 @@
+import React from 'react';
 import styled from '@emotion/styled';
+import NumberFormat from 'react-number-format';
 
-export const StyledInput = styled.input`
+// eslint-disable-next-line react/prop-types
+const Input = (props) => (
+  <NumberFormat
+    decimalScale={ 2 }
+    { ...props }
+  />
+);
+
+export const StyledInput = styled(Input)`
   text-align: right;
   font-size: 3.5rem;
   padding: 1rem;
