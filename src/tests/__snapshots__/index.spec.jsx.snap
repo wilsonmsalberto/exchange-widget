@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component Rendering should render properly 1`] = `
+<DocumentFragment>
+  <main>
+    <div
+      class="css-19n6d3j"
+    >
+      <select
+        class="css-xu4w98"
+      />
+      <input
+        class="css-1x2g7jt"
+        placeholder="0"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="css-1mv8m18"
+    >
+      <select
+        class="css-xu4w98"
+      />
+      <input
+        class="css-1x2g7jt"
+        disabled=""
+        placeholder="0"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="css-1ip6n4i"
+    >
+      <button
+        class="css-15ay18u"
+        type="submit"
+      >
+        Exchange
+      </button>
+    </div>
+  </main>
+</DocumentFragment>
+`;

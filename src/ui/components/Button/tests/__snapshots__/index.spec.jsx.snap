@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Behavior should do nothing without an onClick function 1`] = `
+<DocumentFragment>
+  <button
+    class="css-1rdg8jg"
+    type="button"
+  >
+    Button Text
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component Rendering should contain node content 1`] = `
+<DocumentFragment>
+  <button
+    class="css-1rdg8jg"
+    type="button"
+  >
+    <div>
+      Node Content
+    </div>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Component Rendering should contain text content 1`] = `
+<DocumentFragment>
+  <button
+    class="css-1rdg8jg"
+    type="button"
+  >
+    Button Text
+  </button>
+</DocumentFragment>
+`;

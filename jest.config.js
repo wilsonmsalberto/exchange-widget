@@ -5,10 +5,10 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/'],
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 65,
+      functions: 65,
+      lines: 65,
+      statements: 65,
     },
   },
   moduleNameMapper: {
@@ -20,9 +20,6 @@ module.exports = {
   },
   modulePathIgnorePatterns: ['<rootDir>/coverage/'],
   setupFiles: ['./jest.setup.js'],
-  setupFilesAfterEnv: [
-    '@testing-library/react/cleanup-after-each',
-  ],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
   verbose: true,
